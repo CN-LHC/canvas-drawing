@@ -3,7 +3,7 @@
     "name": "liuhanchuan"
   },
   "bugs": {
-    "url": "https://github.com"
+    "url": "https://github.com/CN-LHC/canvas-drawing/issues"
   },
   "bundleDependencies": false,
   "deprecated": false,
@@ -25,7 +25,7 @@
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-terser": "^7.0.2"
   },
-  "homepage": "https://github.com",
+  "homepage": "https://github.com/CN-LHC/canvas-drawing",
   "keywords": [
     "canvas",
     "drawing",
@@ -38,5 +38,5 @@
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
