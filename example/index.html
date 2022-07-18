@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        padding: 0 10px;
+      }
+      .btn {
+        outline-style: none;
+        margin: 10px;
+        color: #fff;
+        padding: 10px 20px;
+        /* height: 40px; */
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 10px;
+        background-color: skyblue;
+      }
+      .box {
+        display: flex;
+        align-items: center;
+        font-size: 10;
+      }
+      .container,.container2{
+        display: inline-block;
+        position: relative;
+        top: 0;
+        z-index: 100;
+        border: 5px solid #eee;
+        width: 500px;
+        height: 500px;
+      }
+      .container2 {
+        margin-left: 20px;
+        z-index: 200;
+      }
+      .eraserSize,
+      .arrowSize,
+      .textFontSize,
+      .textLineHeight,
+      .lineWidth {
+        display: inline-block;
+        min-width: 40px !important;
+      }
+      label {
+        margin-right: 10px;
+        font-size: 14px;
+        line-height: 10px;
+      }
+      #operations, #operations2 {
+        display: inline-block;
+      }
+    </style>
+    <script src="../dist/easy-drawing-board.min.js"></script>
+  </head>
+  <body>
+    <div id="operations">
+      <button class="btn" id="clear">清空 <br/> clear</button>
+      <button class="btn" id="eraser">橡皮擦 <br/> eraser</button>
+      <button class="btn" id="pencil">铅笔 <br/> pencil</button>
+      <button class="btn" id="straightLine">直线 <br/> straightLine </button>
+      <button class="btn" id="rect">矩形 <br/> rectangular</button>
+      <button class="btn" id="circle">圆形 <br> circle</button>
+      <button class="btn" id="arrow">箭头 <br> arrow</button>
+      <button class="btn" id="text">文字 <br> text </button>
+    </div>
+    <div>
+      <label>线条颜色 lineColor <input id="lineColor" type="color" value="#f00f00"></label>
+      <label>线条粗细 lineWidth: <i class="lineWidth">1</i><input id="lineWidth" type="range" min="1" max="50" value="1"></label>
+      <label>箭头大小 arrowSize: <i class="arrowSize">15</i><input id="arrowSize" type="range" min="10" max="30" value="15"></label>
+      <label>橡皮擦大小 eraserSize: <i class="eraserSize">10</i><input id="eraserSize" type="range" min="1" max="30" value="10"></label> 
+    </div>
+    <br>
+    <div>
+      <label>文字颜色 textColor <input id="textColor" type="color" value="#f00f00"></label>
+      <label>文字大小 textFontSize: <i class="textFontSize">16</i><input id="textFontSize" type="range" min="12" max="22" value="16"></label>
+      <label>文字行高 textLineHeight: <i class="textLineHeight">20</i><input id="textLineHeight" type="range" min="16" max="30" value="20"></label>
+    </div>
+    <br>
+    <div>
+      <label>背景颜色 canvasBgColor <input id="canvasBgColor" type="color" value="#ffffff"></label>
+    </div>
+    <div id="operations2">
+      <button class="btn" id="generateBase64">export base64 data</button>
+      <button class="btn" id="saveImg">save</button>
+      <button class="btn" id="undo">撤销 undo</button>
+      <button class="btn" id="redo">重做 redo</button>
+    </div>
+    <button class="btn" id="reBgImg">替换背景图片 replace img </button>
+    <br />
+    <div class="box">
+      <div class="box-item">
+        <p>canvas_x: <i>0</i>, canvas_y: <i>0</i>, mouse_x: <i>0</i>, mouse_y: <i>0</i></p>
+        <div class="container"></div>
+      </div>
+      <div class="box-item">
+        <p style="margin-left: 20px;">canvas_x: <i>0</i>, canvas_y: <i>0</i>, mouse_x: <i>0</i>, mouse_y: <i>0</i></p>
+        <div class="container2"></div>
+      </div>      
+    </div>
+  </body>
+  <script>
+    window.onload = function () {
+      let draw = null, draw2 = null;
+      const container = document.getElementsByClassName('container')[0];
+      const operations = document.getElementById('operations');
+      const operations2 = document.getElementById('operations2');
+      operations.addEventListener('click', function(e) {
+        if (e.target.nodeName !== 'BUTTON') return
+        let mode = e.target.id
+        if (mode === 'clear') {
+          draw && draw.clear()
+          draw2 && draw2.clear()
+        } else {
+          draw && draw.setMode(mode)
+          draw2 && draw2.setMode(mode)
+        }
+      }, false)
+      operations2.addEventListener('click', function(e) {
+        if (e.target.nodeName !== 'BUTTON') return
+        let event = e.target.id
+        if (event === 'generateBase64') {
+          draw && draw.generateBase64().then(res => {
+            console.log('data1::', res)
+          })
+          draw2 && draw2.generateBase64().then(res => {
+            console.log('data2::', res)
+          })
+          alert('已输出至于 控制台')
+        } else {
+          draw && draw[event]()
+          draw2 && draw2[event]()
+        }
+      }, false)
+      const reBgImgBtn = document.getElementById('reBgImg')
+      reBgImgBtn.addEventListener('click', function() {
+        draw && draw.config('bgImg', 'https://cdn.jsdelivr.net/gh/kaier33/image-hosting-service@main/zelda.jpeg')
+      }, false)
+      const inputEls = document.getElementsByTagName('input');
+      Array.prototype.slice.call(inputEls).forEach(ele => {
+        ele.addEventListener('change', function(e) {
+          switch (e.target.id) {
+            case "lineColor":
+            case "textColor":
+            case "canvasBgColor":
+              draw && draw.config(e.target.id, e.target.value)
+              draw2 && draw2.config(e.target.id, e.target.value)
+              break;
+            case "lineWidth":
+            case "eraserSize":
+            case "arrowSize":
+            case "textFontSize":
+            case "textLineHeight":
+              let dom = document.getElementsByClassName(e.target.id)[0];
+              dom.innerHTML = e.target.value
+              draw && draw.config(e.target.id, e.target.value)
+              draw2 && draw2.config(e.target.id, e.target.value)
+              break;  
+          }
+        })
+      });
+      const options = {
+        container,
+        bgImg: 'https://cdn.jsdelivr.net/gh/kaier33/image-hosting-service@main/ori.jpeg'
+      };
+      draw = new EasyDrawingBoard(options);
+      window.draw = draw
+      const container2 = document.getElementsByClassName('container2')[0];
+      draw2 = new EasyDrawingBoard({container: container2});
+      window.draw2 = draw2;
+      
+      const coords1 = document.getElementsByClassName('box-item')[0].children[0].children;
+      const coords2 = document.getElementsByClassName('box-item')[1].children[0].children;
+      draw.evt.on('drawing', function(coords) {
+        coords1[0].innerText = coords.x
+        coords1[1].innerText = coords.y
+        coords1[2].innerText = coords.clientX
+        coords1[3].innerText = coords.clientY
+      })
+      
+      draw2.evt.on('drawBegin', function(coords) {
+        console.log('begin2', coords);
+      })
+      draw2.evt.on('drawing', function(coords) {
+        coords2[0].innerText = coords.x
+        coords2[1].innerText = coords.y
+        coords2[2].innerText = coords.clientX
+        coords2[3].innerText = coords.clientY
+      })
+      draw2.evt.on('drawEnd', function(coords) {
+        console.log('end2', coords);
+      })
+    };
+  </script>
+  
+</html>

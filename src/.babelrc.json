@@ -1,0 +1,10 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "useBuiltIns": "usage",
+      "modules": false,
+      "corejs": 3, 
+      "targets": "> 0.25%, not dead" 
+    }]
+  ]
+}
