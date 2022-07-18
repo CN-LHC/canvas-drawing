@@ -10,14 +10,14 @@ export default {
   input: 'src/index.js',
   output: [
     {
-      file: './dist/easy-drawing-board.esm.js',
+      file: './dist/canvas-drawing.esm.js',
       format: 'es',
-      name: 'EasyDrawingBoard'
+      name: 'canvasDrawing'
     },
     {
-      file: './dist/easy-drawing-board.min.js',
+      file: './dist/canvas-drawing.min.js',
       format: 'iife',
-      name: 'EasyDrawingBoard'
+      name: 'canvasDrawing'
     }
   ],
   plugins: [
