@@ -32,11 +32,11 @@
     "canvas-draw"
   ],
   "license": "MIT",
-  "main": "./dist/canvas-draw.esm.js",
+  "main": "./dist/canvas-drawing.esm.js",
   "name": "canvas-drawing",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
-  "version": "1.0.1"
+  "version": "1.0.3"
 }
