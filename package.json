@@ -30,7 +30,9 @@
   "keywords": [
     "canvas",
     "drawing",
-    "canvas-draw"
+    "canvas-draw",
+    "canvasDrawing",
+    "canvas-drawing"
   ],
   "license": "MIT",
   "main": "./dist/canvas-drawing.esm.js",
@@ -39,5 +41,5 @@
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
-  "version": "1.0.3"
+  "version": "1.0.5"
 }

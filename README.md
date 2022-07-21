@@ -42,7 +42,7 @@ git clone this repository then open `example/index.html` in your browser
 ### Initialize
 
 ```html
-<script type="text/javascript" src="//{you path to the dist file}/dist/easy-drawing-board.min.js"></script>
+<script type="text/javascript" src="//{you path to the dist file}/dist/canvas-drawing.min.js"></script>
 <style>.container { width: 500px; height: 500px; }</style>
 <div class="container"></div>
 ```
@@ -57,7 +57,7 @@ const options = {
   canvas's dimension of the pixels is (devicePixelRatio * canvas's display size) by default.
   canvas's display size equals container's size (width/height)
 */  
-const draw = new EasyDrawingBoard(options); 
+const draw = new canvasDrawing(options); 
 ```
 
 ### Options
@@ -141,8 +141,8 @@ const draw = new EasyDrawingBoard(options);
   draw.conifg('lineColor', '#FF1493')                         // Change the color of the brush.
   draw.setMode('rect')                                        // Now you can draw the rectangle.
 
-  draw.generateBase64().then(data => console.log(data))       // generateBase64 method default is to export the PNG base64 data.                      
-  draw.generateBase64('jpeg').then(data => console.log(data)) // get smaller data.                  
+  draw.generateBase64().then(data => console.log(data))       // generateBase64 method default is to export the PNG base64 data.                    
+  draw.generateBase64('jpeg').then(data => console.log(data)) // get smaller data.                
 
   draw.saveImg()                                              // Save the canvas as an PNG images, and the file name is canvas_imgae.png.
   draw.saveImg({fileName: '233.png'})                         // Just Change of file name.
