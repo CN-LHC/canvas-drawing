@@ -59,7 +59,7 @@
         display: inline-block;
       }
     </style>
-    <script src="../dist/easy-drawing-board.min.js"></script>
+    <script src="../dist/canvas-drawing.min.js"></script>
   </head>
   <body>
     <div id="operations">
@@ -171,10 +171,10 @@
         container,
         bgImg: 'https://cdn.jsdelivr.net/gh/kaier33/image-hosting-service@main/ori.jpeg'
       };
-      draw = new EasyDrawingBoard(options);
+      draw = new canvasDrawing(options);
       window.draw = draw
       const container2 = document.getElementsByClassName('container2')[0];
-      draw2 = new EasyDrawingBoard({container: container2});
+      draw2 = new canvasDrawing({container: container2});
       window.draw2 = draw2;
       
       const coords1 = document.getElementsByClassName('box-item')[0].children[0].children;
