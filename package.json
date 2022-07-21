@@ -41,5 +41,5 @@
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
-  "version": "1.0.5"
+  "version": "1.0.6"
 }
