@@ -227,6 +227,14 @@ class Draw {
         this.context.stroke();
         this.context.closePath();
       },
+      fillRect: (mousePosition) => {
+        const { newOriginX, newOriginY, distanceX, distanceY } = mousePosition;
+        this.reDraw();
+        this.context.rect(newOriginX, newOriginY, distanceX, distanceY);
+        this.context.stroke();
+        this.context.fill()
+        this.context.closePath();
+      },
       circle: (mousePosition) => {
         const { newOriginX, newOriginY, distanceX, distanceY } = mousePosition;
         this.reDraw();
