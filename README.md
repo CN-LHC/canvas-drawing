@@ -27,7 +27,7 @@ Using script tag
 
 ## Play
 
-[live example](https://codepen.io/kaierchou/project/editor/AEepEK#)
+[live example](https://codepen.io/cn-lhc/pen/abYwdar)
 
 or
 
@@ -141,8 +141,8 @@ const draw = new canvasDrawing(options);
   draw.conifg('lineColor', '#FF1493')                         // Change the color of the brush.
   draw.setMode('rect')                                        // Now you can draw the rectangle.
 
-  draw.generateBase64().then(data => console.log(data))       // generateBase64 method default is to export the PNG base64 data.                  
-  draw.generateBase64('jpeg').then(data => console.log(data)) // get smaller data.              
+  draw.generateBase64().then(data => console.log(data))       // generateBase64 method default is to export the PNG base64 data.                
+  draw.generateBase64('jpeg').then(data => console.log(data)) // get smaller data.            
 
   draw.saveImg()                                              // Save the canvas as an PNG images, and the file name is canvas_imgae.png.
   draw.saveImg({fileName: '233.png'})                         // Just Change of file name.
